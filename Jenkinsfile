@@ -1,94 +1,13 @@
-// pipeline {
-//     agent anywithCredentials([<object of type com.cloudbees.jenkins.plugins.awscredentials.AmazonWebServicesCredentialsBinding>]) {
-//     // some block
-// }
-//     parameters {
-//         credentials credentialType: 'com.cloudbees.jenkins.plugins.awscredentials.AWSCredentialsImpl', defaultValue: '', name: 'AWS', required: false
-// }
-
-//     environment {
-//         PATH = "${PATH}:${getTerraformPath()}"
-//     }
-//     stages{
-
-//          stage('Initial Deployment Approval') {
-//               steps {
-//                 script {
-//                 def userInput = input(id: 'confirm', message: 'Start Pipeline?', parameters: [ [$class: 'BooleanParameterDefinition', defaultValue: false, description: 'Start Pipeline', name: 'confirm'] ])
-//              }
-//            }
-//         }
-
-//          stage('terraform init'){
-//              steps {
-//                  //sh "returnStatus: true, script: 'terraform workspace new dev'"
-//                  sh "terraform init"
-                 
-//          }
-//          }
-//          stage('terraform plan'){
-//              steps {
-//                  //sh "returnStatus: true, script: 'terraform workspace new dev'"
-//                 //  sh "terraform apply -auto-approve"
-//                   sh "terraform plan -out=tfplan -input=false"
-//              }
-//          }
-//         stage('Dev Deployment Approval') {
-//               steps {
-//                 script {
-//                 def userInput = input(id: 'confirm', message: 'Apply Terraform?', parameters: [ [$class: 'BooleanParameterDefinition', defaultValue: false, description: 'Apply terraform', name: 'confirm'] ])
-//              }
-//            }
-//         }
-//          stage('Deploy into Dev'){
-//              steps {
-//                  //sh "returnStatus: true, script: 'terraform workspace new dev'"
-//                     //  sh "terraform apply -auto-approve"
-//                      sh "terraform destroy -input=false -auto-approve"
-//                 //   sh "terraform apply  -input=false tfplan"
-//              }
-//          }
-
-
-//         //   stage('UAT Deployment Approval') {
-//         //       steps {
-//         //         script {
-//         //         def userInput = input(id: 'confirm', message: 'Deploy into UAT?', parameters: [ [$class: 'BooleanParameterDefinition', defaultValue: false, description: 'Deploy Into UAT', name: 'confirm'] ])
-//         //      }
-//         //    }
-//         // }
-
-//         // stage('Deploy into UAT'){
-//         //      steps {
-//         //          //sh "returnStatus: true, script: 'terraform workspace new dev'"
-//         //          //sh "terraform apply -auto-approve"
-//         //         //  sh "terraform destroy -input=false -auto-approve"
-//         //          sh "terraform apply  -input=false tfplan"
-//         //      }
-//         //  }
-        
-//     }
-// }
-
-//  def getTerraformPath(){
-//         def tfHome= tool name: 'terraform-14', type: 'terraform'
-//         return tfHome
-//     }
-
-// //  def getAnsiblePath(){
-// //         def AnsibleHome= tool name: 'Ansible', type: 'org.jenkinsci.plugins.ansible.AnsibleInstallation'
-// //         return AnsibleHome
-// //    }
-
-// ---------------Added by kjadex ------------------
-
 pipeline {
-    agent {
-        // Define agent details here
-    }
+    agent anywithCredentials([<object of type com.cloudbees.jenkins.plugins.awscredentials.AmazonWebServicesCredentialsBinding>]) {
+    // some block
+}
+    parameters {
+        credentials credentialType: 'com.cloudbees.jenkins.plugins.awscredentials.AWSCredentialsImpl', defaultValue: '', name: 'AWS', required: false
+}
+
     environment {
-        AWS_ACCESS_KEY_ID     = credentials('jenkins-aws-secret-key-id')
-        AWS_SECRET_ACCESS_KEY = credentials('jenkins-aws-secret-access-key')
+        PATH = "${PATH}:${getTerraformPath()}"
     }
     stages{
 
@@ -160,3 +79,4 @@ pipeline {
 //         def AnsibleHome= tool name: 'Ansible', type: 'org.jenkinsci.plugins.ansible.AnsibleInstallation'
 //         return AnsibleHome
 //    }
+

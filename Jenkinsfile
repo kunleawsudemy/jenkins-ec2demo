@@ -1,9 +1,7 @@
 pipeline {
-    agent anywithCredentials([<object of type com.cloudbees.jenkins.plugins.awscredentials.AmazonWebServicesCredentialsBinding>]) {
-    // some block
-}
+    agent any
     parameters {
-        credentials credentialType: 'com.cloudbees.jenkins.plugins.awscredentials.AWSCredentialsImpl', defaultValue: '', name: 'AWS', required: false
+      credentials credentialType: 'com.cloudbees.jenkins.plugins.awscredentials.AWSCredentialsImpl', defaultValue: 'jenkins_credentials', name: 'AWS', required: false
 }
 
     environment {

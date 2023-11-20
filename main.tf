@@ -13,22 +13,24 @@
 resource "aws_iam_role" "ssmrole" {
   name = "ssmrole"
 
-  assume_role_policy = <<EOF
-{
-  "Version": "2012-10-17",
-  "Statement": [
-    {
-      "Effect": "Allow",
-      "Principal": {
-        "Service": "ec2.amazonaws.com"
+  # Terraform's "jsonencode" function converts a
+  # Terraform expression result to valid JSON syntax.
+  assume_role_policy = jsonencode({
+    Version = "2012-10-17"
+    Statement = [
+      {
+        Action = "sts:AssumeRole"
+        Effect = "Allow"
+        Sid    = ""
+        Principal = {
+          Service = "ec2.amazonaws.com"
+        }
       },
-      "Action": "sts:AssumeRole"
-    }
-  ]
-}
-EOF
+    ]
+  })
+
   tags = {
-    Name = "ssmrole"
+    tag-key = "ssmrole"
   }
 }
 

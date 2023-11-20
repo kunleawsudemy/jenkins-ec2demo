@@ -1,7 +1,7 @@
 pipeline {
     agent any
     parameters {
-        credentials credentialType: 'com.cloudbees.jenkins.plugins.awscredentials.AWSCredentialsImpl', defaultValue: 'stack-terraform', name: 'AWS', required: false
+        credentials credentialType: 'com.cloudbees.jenkins.plugins.awscredentials.AWSCredentialsImpl', defaultValue: 'stack-terraform', name: 'AWS', required: true
     }
 
     environment {

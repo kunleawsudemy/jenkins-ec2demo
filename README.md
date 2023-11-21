@@ -1,6 +1,9 @@
 # terraform-jenkins
 
-# terraform-jenkins
+Jenkins Server role to allow Github & Jenkins checkout github without passing AWS Credentials
+Role requuires the following permission:
+    -    AdministratorAccess
+    -    AmazonSSMManagedInstanceCore (To allow SSM)
 
 ## ----------- User Data for EC2 Instance ----------------------------
 #!/bin/bash

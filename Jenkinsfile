@@ -58,7 +58,7 @@ pipeline {
     stages{
         stage('Git Checkout'){
             steps{
-                git branch: 'main', credentialsId: 'github_credential', url: 'https://github.com/kunleadex/terraform-jenkins'
+                git branch: 'main', credentialsId: 'Github_Credentials', url: 'https://github.com/kunleawsudemy/jenkins-ec2demo'
             }
         }
         stage('Terraform Init'){

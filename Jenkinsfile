@@ -50,3 +50,26 @@
 //         return tfHome
 //     }
 
+pipeline {
+    agent any
+    tools {
+        terraform 'terraform-11'
+    }
+    stages{
+        stage('Git Checkout'){
+            steps{
+                git branch: 'main', credentialsId: 'github_credential', url: 'https://github.com/kunleadex/terraform-jenkins'
+            }
+        }
+        stage('Terraform Init'){
+            steps{
+                sh 'terraform init'
+            }
+        }
+        stage('Terraform Apply'){
+            steps{
+                sh 'terraform destroy --auto-approve'
+            }
+        }
+    }
+}
